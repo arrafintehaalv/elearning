@@ -101,7 +101,7 @@ class SharePlaceScreen extends Component {
         }
       };
     });
-  };
+  }
 
   placeAddedHandler = () => {
     this.props.onAddPlace(
@@ -130,10 +130,9 @@ class SharePlaceScreen extends Component {
               onPress={this.placeAddedHandler}
               disabled={
                 !this.state.controls.placeName.valid ||
-                !this.state.controls.image.valid ||
-                !this.state.controls.location.valid
+                !this.state.controls.location.valid ||
+                !this.state.controls.image.valid
               }
-              /*  || */
             />
           </View>
         </View>
@@ -165,12 +164,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddPlace: (placeName, location, image) =>
-      dispatch(addPlace(placeName, location, image))
+    onAddPlace: (placeName, location, image) => dispatch(addPlace(placeName, location, image))
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SharePlaceScreen);
+export default connect(null, mapDispatchToProps)(SharePlaceScreen);

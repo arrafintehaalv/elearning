@@ -8,18 +8,20 @@ import {
   Dimensions
 } from "react-native";
 import MapView from "react-native-maps";
+
 class PickLocation extends Component {
   state = {
     focusedLocation: {
       latitude: 23.8103,
       longitude: 90.4125,
-      latitudeDelta: 0.015,
+      latitudeDelta: 0.0122,
       longitudeDelta:
         (Dimensions.get("window").width / Dimensions.get("window").height) *
         0.0122
     },
     locationChosen: false
   };
+
   pickLocationHandler = event => {
     const coords = event.nativeEvent.coordinate;
     this.map.animateToRegion({
@@ -54,9 +56,11 @@ class PickLocation extends Component {
             }
           }
         };
+        this.pickLocationHandler(coordsEvent);
       },
       err => {
         console.log(err);
+        alert("Fetching the Position failed, please pick one manually!");
       }
     );
   };
@@ -67,6 +71,7 @@ class PickLocation extends Component {
     if (this.state.locationChosen) {
       marker = <MapView.Marker coordinate={this.state.focusedLocation} />;
     }
+
     return (
       <View style={styles.container}>
         <MapView
