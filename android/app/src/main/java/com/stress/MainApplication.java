@@ -3,7 +3,7 @@ package com.stress;
 import android.app.Application;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactApplication;
-import com.reactnativenavigation.NavigationReactPackage;
+// import com.reactnativenavigation.NavigationReactPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -28,7 +28,8 @@ public class MainApplication extends NavigationApplication {
 		// No need to add RnnPackage and MainReactPackage
 		return Arrays.<ReactPackage>asList(
 			new VectorIconsPackage(),
-			new MapsPackage()
+			new MapsPackage(),
+			new ImagePickerPackage()
 			// eg. new VectorIconsPackage()
 		);
 	}
