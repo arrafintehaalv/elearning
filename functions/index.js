@@ -11,8 +11,8 @@ const gcs = require("@google-cloud/storage")(gcconfig);
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
-exports.store = functions.https.onRequest((request, response) => {
-  return cors(request, response, () => {
+exports.storeImage = functions.https.onRequest((request, response) => {
+  cors(request, response, () => {
     const body = JSON.parse(request.body);
     fs.writeFileSync("/tmp/uploaded-image.jpg", body.image, "base64", err => {
       console.log(err);
@@ -21,7 +21,7 @@ exports.store = functions.https.onRequest((request, response) => {
     const bucket = gcs.bucket("locationapp-adee9.appspot.com");
     const uuid = UUID();
 
-    return bucket.upload(
+    bucket.upload(
       "/tmp/uploaded-image.jpg",
       {
         uploadType: "media",
@@ -35,7 +35,7 @@ exports.store = functions.https.onRequest((request, response) => {
       },
       (err, file) => {
         if (!err) {
-          return response.status(201).json({
+          response.status(201).json({
             imageUrl:
               "https://firebasestorage.googleapis.com/v0/b/" +
               bucket.name +
@@ -46,9 +46,11 @@ exports.store = functions.https.onRequest((request, response) => {
           });
         } else {
           console.log(err);
-          return response.status(500).json({ error: err });
+          response.status(500).json({ error: err });
         }
       }
     );
   });
 });
+
+// const bucket = gcs.bucket("locationapp-adee9.appspot.com");
