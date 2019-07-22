@@ -57,8 +57,8 @@ class PlaceDetail extends Component {
               style={styles.placeImage}
             />
           </View>
-          <View style={styles.subContainer}>
-            <MapView
+          {/* <View style={styles.subContainer}> */}
+          {/* <MapView
               initialRegion={{
                 ...this.props.selectedPlace.location,
                 latitudeDelta: 0.0122,
@@ -70,8 +70,8 @@ class PlaceDetail extends Component {
               style={styles.map}
             >
               <MapView.Marker coordinate={this.props.selectedPlace.location} />
-            </MapView>
-          </View>
+            </MapView> */}
+          {/* </View> */}
         </View>
         <View style={styles.subContainer}>
           <View>
@@ -136,4 +136,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(PlaceDetail);
+export default connect(
+  null,
+  mapDispatchToProps
+)(PlaceDetail);

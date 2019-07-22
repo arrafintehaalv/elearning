@@ -27,11 +27,15 @@ class FindPlaceScreen extends Component {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
 
-  componentDidMount() {
-    this.props.onLoadPlaces();
-  }
-
   onNavigatorEvent = event => {
+    if (event.type === "ScreenChangedEvent") {
+      if (event.id === "willAppear") {
+        this.props.onLoadPlaces();
+        // this.setState({
+        //   placesLoaded: false
+        // });
+      }
+    }
     if (event.type === "NavBarButtonPress") {
       if (event.id === "sideDrawerToggle") {
         this.props.navigator.toggleDrawer({
@@ -92,7 +96,7 @@ class FindPlaceScreen extends Component {
       >
         <TouchableOpacity onPress={this.placesSearchHandler}>
           <View style={styles.searchButton}>
-            <Text style={styles.searchButtonText}>Find Places</Text>
+            <Text style={styles.searchButtonText}>Find Contents</Text>
           </View>
         </TouchableOpacity>
       </Animated.View>
@@ -150,4 +154,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FindPlaceScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FindPlaceScreen);
